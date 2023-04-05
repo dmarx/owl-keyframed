@@ -1,6 +1,3 @@
-The following code implements a full coverage test suite for the `Keyframe`, `Interpolator`, `LinearInterpolator`, `CubicInterpolator`, `BezierInterpolator`, and `Curve` classes:
-
-```
 import pytest
 from keyframed import Keyframe, Interpolator, LinearInterpolator, CubicInterpolator, BezierInterpolator, Curve
 
@@ -86,4 +83,3 @@ data = curve.to_dict()
 
 # Deserialize a curve from a dictionary
 curve2 = Curve.from_dict(data)
-```
