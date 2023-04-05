@@ -36,51 +36,31 @@ class LinearInterpolator(Interpolator):
     """
     def interpolate(self, t: float, p0: Tuple[float, float], p1: Tuple[float, float]) -> float:
         return p0[1] * (1.0 - t) + p1[1] * t
-
+    
 class CubicInterpolator(Interpolator):
     """
     A cubic interpolator.
     """
     def interpolate(self, t: float, p0: Tuple[float, float], p1: Tuple[float, float]) -> float:
-        dt = p1[0] - p0[0]
-        dt2 = dt * dt
-        m0 = (p1[1] - p0[1]) / dt
-        m1 = 0.0
-        if len(p0) == 3 and len(p1) == 3:
-            m1 = ((p1[2] - p0[2]) / dt2 - m0) * dt
-        t2 = t * t
-        t3 = t2 * t
-        return (2.0 * t3 - 3.0 * t2 + 1.0) * p0[1] + (t3 - 2.0 * t2 + t) * m0 + (-2.0 * t3 + 3.0 * t2) * p1[1] + (t3 - t2) * m1
+        a = 3 * (p1[1] - p0[1])
+        b = 3 * (p0[1] - 2 * p1[1] + p1[1])
+        c = 3 * p1[1] - 3 * p0[1] + p0[1] - p1[1]
+        return a * t ** 3 + b * t ** 2 + c * t + p0[1]
 
 class BezierInterpolator(Interpolator):
     """
-    A bezier interpolator.
+    A Bezier interpolator.
     """
-    def __init__(self, control_points: List[Tuple[float, float]]):
-        super().__init__()
-        self.control_points = control_points
+    def __init__(self, p0: Tuple[float, float], p1: Tuple[float, float], p2: Tuple[float, float], p3: Tuple[float, float]):
+        self.p0 = p0
+        self.p1 = p1
+        self.p2 = p2
+        self.p3 = p3
 
     def interpolate(self, t: float, p0: Tuple[float, float], p1: Tuple[float, float]) -> float:
-        def bezier(t: float, p0: Tuple[float, float], p1: Tuple[float, float], p2: Tuple[float, float], p3: Tuple[float, float]) -> float:
-            return (1.0 - t) ** 3 * p0[1] + 3.0 * (1.0 - t) ** 2 * t * p1[1] + 3.0 * (1.0 - t) * t ** 2 * p2[1] + t ** 3 * p3[1]
-
-        t0 = 0.0
-        t1 = 1.0
-        while True:
-            p01 = (p0[0] + (p1[0] - p0[0]) * t, p0[1] + (p1[1] - p0[1]) * t)
-            p12 = (p1[0] + (p2[0] - p1[0]) * t, p1[1] + (p2[1] - p1[1]) * t)
-            p23 = (p2[0] + (p3[0] - p2[0]) * t, p2[1] + (p3[1] - p2[1]) * t)
-            p012 = (p01[0] + (p12[0] - p01[0]) * t, p01[1] + (p12[1] - p01[1]) * t)
-            p123 = (p12[0] + (p23[0] - p12[0]) * t, p12[1] + (p23[1] - p12[1]) * t)
-            p0123 = (p012[0] + (p123[0] - p012[0]) * t, p012[1] + (p123[1] - p012[1]) * t)
-            if abs(p0123[0] - p0[0]) < 1e-6:
-                break
-            if p0123[0] > p0[0]:
-                t1 = t
-            else:
-                t0 = t
-            t = (t0 + t1) / 2.0
-        return bezier(t, p0, self.control_points[0], self.control_points[1], p1)
+        x = (1 - t) ** 3 * self.p0[0] + 3 * (1 - t) ** 2 * t * self.p1[0] + 3 * (1 - t) * t ** 2 * self.p2[0] + t ** 3 * self.p3[0]
+        y = (1 - t) ** 3 * self.p0[1] + 3 * (1 - t) ** 2 * t * self.p1[1] + 3 * (1 - t) * t ** 2 * self.p2[1] + t ** 3 * self.p3[1]
+        return y
 
 class Curve:
     """
