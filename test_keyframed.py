@@ -1,6 +1,42 @@
 import pytest
 from keyframed import Keyframe, Interpolator, LinearInterpolator, CubicInterpolator, BezierInterpolator, Curve
 
+### "new" tests
+
+def test_linear_interpolator():
+    li = LinearInterpolator()
+    assert li.interpolate(0.0, (0.0, 0.0), (1.0, 1.0)) == 0.0
+    assert li.interpolate(1.0, (0.0, 0.0), (1.0, 1.0)) == 1.0
+    assert li.interpolate(0.5, (0.0, 0.0), (1.0, 1.0)) == 0.5
+
+def test_cubic_interpolator():
+    ci = CubicInterpolator()
+    assert ci.interpolate(0.0, (0.0, 0.0), (1.0, 1.0)) == 0.0
+    assert ci.interpolate(1.0, (0.0, 0.0), (1.0, 1.0)) == 1.0
+    assert ci.interpolate(0.5, (0.0, 0.0), (1.0, 1.0)) == 0.5
+
+def test_bezier_interpolator():
+    bi = BezierInterpolator((0.0, 0.0), (0.5, 1.0), (0.5, 0.0), (1.0, 1.0))
+    assert bi.interpolate(0.0, (0.0, 0.0), (1.0, 1.0)) == 0.0
+    assert bi.interpolate(1.0, (0.0, 0.0), (1.0, 1.0)) == 1.0
+    assert bi.interpolate(0.5, (0.0, 0.0), (1.0, 1.0)) == 0.75
+
+def test_curve():
+    li = LinearInterpolator()
+    kf1 = Keyframe(0.0, 0.0)
+    kf2 = Keyframe(1.0, 1.0)
+    kf3 = Keyframe(2.0, 0.0)
+    curve = Curve([kf1, kf2, kf3], li)
+    assert curve.evaluate(0.0) == 0.0
+    assert curve.evaluate(1.0) == 1.0
+    assert curve.evaluate(2.0) == 0.0
+    curve.add_keyframe(Keyframe(1.5, 0.5))
+    assert curve.evaluate(1.25) == 0.25
+    curve.remove_keyframe(1)
+    assert curve.evaluate(1.25) == 0.5
+
+###
+
 def test_keyframe():
     kf = Keyframe(1.0, 2.0)
     assert kf.time == 1.0
