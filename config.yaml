@@ -1,0 +1,13 @@
+# Config file for complete_code.py
+
+# The file extension you will use to indicate partial documents to be completed
+prompt_extension: .llm_prompt
+
+# the default extension files will be written to
+target_extension: .py
+
+# Completion options for OpenAI API
+completion_options:
+  model: gpt-3.5-turbo
+  temperature: 0.1
+  max_tokens: 2048
