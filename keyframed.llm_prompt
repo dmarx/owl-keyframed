@@ -1,3 +1,41 @@
+"""
+The following code is currently faililng tests. here's the error emitted by CI
+
+```python
+    def test_curve():
+        li = LinearInterpolator()
+        ci = CubicInterpolator()
+        bi = BezierInterpolator([(0.25, 0.25), (0.75, 0.75)])
+        kf1 = Keyframe(0.0, 0.0)
+        kf2 = Keyframe(1.0, 1.0)
+        kf3 = Keyframe(2.0, 0.0)
+        curve = Curve([kf1, kf2, kf3], li)
+        assert curve.evaluate(-1.0) == 0.0
+        assert curve.evaluate(0.0) == 0.0
+        assert curve.evaluate(0.5) == 0.5
+        assert curve.evaluate(1.0) == 1.0
+        assert curve.evaluate(2.0) == 0.0
+        curve.add_keyframe(Keyframe(1.5, 0.5))
+>       assert curve.evaluate(1.25) == 0.25
+E       assert 0.75 == 0.25
+E        +  where 0.75 = <bound method Curve.evaluate of <keyframed.Curve object at 0x7fb3e00a5880>>(1.25)
+E        +    where <bound method Curve.evaluate of <keyframed.Curve object at 0x7fb3e00a5880>> = <keyframed.Curve object at 0x7fb3e00a5880>.evaluate
+
+test_keyframed.py:41: AssertionError
+=========================== short test summary info ============================
+FAILED test_keyframed.py::test_cubic_interpolator - assert 0.625 == 0.5
+ +  where 0.625 = <bound method CubicInterpolator.interpolate of <keyframed.CubicInterpolator object at 0x7fb3e004e280>>(0.5, (0.0, 0.0), (1.0, 1.0))
+ +    where <bound method CubicInterpolator.interpolate of <keyframed.CubicInterpolator object at 0x7fb3e004e280>> = <keyframed.CubicInterpolator object at 0x7fb3e004e280>.interpolate
+FAILED test_keyframed.py::test_bezier_interpolator - NameError: name 'p2' is not defined
+FAILED test_keyframed.py::test_curve - assert 0.75 == 0.25
+ +  where 0.75 = <bound method Curve.evaluate of <keyframed.Curve object at 0x7fb3e00a5880>>(1.25)
+ +    where <bound method Curve.evaluate of <keyframed.Curve object at 0x7fb3e00a5880>> = <keyframed.Curve object at 0x7fb3e00a5880>.evaluate
+========================= 3 failed, 2 passed in 0.06s ==========================
+Error: Process completed with exit code 1.
+```
+Please modify the code below to account for this bug (and any others you identify).
+"""
+
 import json
 from typing import List, Tuple
 
