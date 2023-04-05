@@ -1,9 +1,3 @@
-<document>
-<!-- 
-filename: README.md
-description: PR/FAQ for a library which implements a suite of pythonic datatypes for specifying and manipulating curves parameterized by keyframes and interpolators. Includes a brief tutorial demonstrating main functionality.
--->
-
 # Keyframed
 
 Keyframed is a python library that provides a set of datatypes for specifying and manipulating curves parameterized by keyframes and interpolators. It is designed to be easy to use and integrate into existing projects.
@@ -87,4 +81,3 @@ Contributions are welcome! Please see the [contributing guidelines](CONTRIBUTING
 ## License
 
 Keyframed is licensed under the [MIT License](LICENSE).
-</document>
