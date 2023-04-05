@@ -71,14 +71,14 @@ def test_curve():
 # # Evaluate the curve at a specific time
 # value = curve.evaluate(0.5)
 
-# Add a keyframe to the curve
-curve.add_keyframe(Keyframe(1.5, 0.5))
+# # Add a keyframe to the curve
+# curve.add_keyframe(Keyframe(1.5, 0.5))
 
-# Remove a keyframe from the curve
-curve.remove_keyframe(1)
+# # Remove a keyframe from the curve
+# curve.remove_keyframe(1)
 
-# Serialize the curve to a dictionary
-data = curve.to_dict()
+# # Serialize the curve to a dictionary
+# data = curve.to_dict()
 
-# Deserialize a curve from a dictionary
-curve2 = Curve.from_dict(data)
+# # Deserialize a curve from a dictionary
+# curve2 = Curve.from_dict(data)
