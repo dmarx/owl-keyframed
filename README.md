@@ -1,20 +1,21 @@
 # TAKEAWAYS
 
 1. The added overhead of waiting for the workflow to do its thing is non-trivial. Not super conducive to real-time collaboration. 
-  - This could be a good approach for automating suggested improvements, but the "pair-programming" workflow of copilot probably makes more sense for more real-time type stuff.
-2. File extension isn't a good trigger. Just in this simple experiment, I had three different filetypes I wanted to generate (.py, .md, .yaml), and this was a fairly trivial example.
-  - would be better if something like this could be triggered on its own without me needing to prompt it.
-    - automated code review suggestions
-    - automated docstring completions
-    - automated type hinting
-    - automated readme/tutorial/documentation generation
-      - would require decomposition into several steps
-3. Context length is a significant limiting factor. 
-  - could probably prompt it to generate smaller chunks of self-contained code (e.g. one class per file)
-  - a language like c++ that uses a separate header file to define interfaces might be well suited for this.
-  - for python, maybe I could get away with generating typing stubs for context.
+    * This could be a good approach for automating suggested improvements, but the "pair-programming" workflow of copilot probably makes more sense for more real-time type stuff.
 
-- dmarx
+2. File extension isn't a good trigger. Just in this simple experiment, I had three different filetypes I wanted to generate (.py, .md, .yaml), and this was a fairly trivial example.
+    - would be better if something like this could be triggered on its own without me needing to prompt it.
+      - automated code review suggestions
+      - automated docstring completions
+      - automated type hinting
+      - automated readme/tutorial/documentation generation
+        - would require decomposition into several steps
+3. Context length is a significant limiting factor. 
+    - could probably prompt it to generate smaller chunks of self-contained code (e.g. one class per file)
+    - a language like c++ that uses a separate header file to define interfaces might be well suited for this.
+    - for python, maybe I could get away with generating typing stubs for context.
+
+\- dmarx
 
 ---
 
