@@ -1,8 +1,0 @@
-# filename: .github/workflows/run_pytest.yaml
-# the following github workflow runs the unit tests with pytest
-
-name: Run Tests
-
-on:  
-  push:
-  workflow_dispatch:

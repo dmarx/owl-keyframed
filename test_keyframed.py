@@ -47,39 +47,38 @@ def test_curve():
     assert curve2.evaluate(0.5) == 0.5
     assert curve2.evaluate(1.25) == 0.25
     assert curve2.evaluate(2.0) == 0.0
-```
 
-The following code provides demonstrative usage examples for the `Keyframe`, `Interpolator`, `LinearInterpolator`, `CubicInterpolator`, `BezierInterpolator`, and `Curve` classes:
 
-```
-from keyframed import Keyframe, Interpolator, LinearInterpolator, CubicInterpolator, BezierInterpolator, Curve
+# The following code provides demonstrative usage examples for the `Keyframe`, `Interpolator`, `LinearInterpolator`, `CubicInterpolator`, `BezierInterpolator`, and `Curve` classes:
 
-# Create a keyframe
-kf = Keyframe(1.0, 2.0)
+# from keyframed import Keyframe, Interpolator, LinearInterpolator, CubicInterpolator, BezierInterpolator, Curve
 
-# Create an interpolator
-li = LinearInterpolator()
+# # Create a keyframe
+# kf = Keyframe(1.0, 2.0)
 
-# Interpolate between two points
-value = li.interpolate(0.5, (0.0, 0.0), (1.0, 1.0))
+# # Create an interpolator
+# li = LinearInterpolator()
 
-# Create a curve
-kf1 = Keyframe(0.0, 0.0)
-kf2 = Keyframe(1.0, 1.0)
-kf3 = Keyframe(2.0, 0.0)
-curve = Curve([kf1, kf2, kf3], li)
+# # Interpolate between two points
+# value = li.interpolate(0.5, (0.0, 0.0), (1.0, 1.0))
 
-# Evaluate the curve at a specific time
-value = curve.evaluate(0.5)
+# # Create a curve
+# kf1 = Keyframe(0.0, 0.0)
+# kf2 = Keyframe(1.0, 1.0)
+# kf3 = Keyframe(2.0, 0.0)
+# curve = Curve([kf1, kf2, kf3], li)
 
-# Add a keyframe to the curve
-curve.add_keyframe(Keyframe(1.5, 0.5))
+# # Evaluate the curve at a specific time
+# value = curve.evaluate(0.5)
 
-# Remove a keyframe from the curve
-curve.remove_keyframe(1)
+# # Add a keyframe to the curve
+# curve.add_keyframe(Keyframe(1.5, 0.5))
 
-# Serialize the curve to a dictionary
-data = curve.to_dict()
+# # Remove a keyframe from the curve
+# curve.remove_keyframe(1)
 
-# Deserialize a curve from a dictionary
-curve2 = Curve.from_dict(data)
+# # Serialize the curve to a dictionary
+# data = curve.to_dict()
+
+# # Deserialize a curve from a dictionary
+# curve2 = Curve.from_dict(data)
